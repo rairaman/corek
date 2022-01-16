@@ -1,15 +1,18 @@
 from lark import Lark
-from corek_transformer import CorekTransformer
+import src
+from src.corek_transformer import CorekTransformer
+from importlib_resources import files, as_file
 
 class RulesEngine():
 
     def __init__(self):
-        with open('corek_grammar.lark','r') as cgfd:
+        source_grammar = files(src).joinpath('corek_grammar.lark')
+        with open(source_grammar,'r') as cgfd:
             self.corek_grammar = cgfd.read()
 
-    def test(self, input_values):
+    def evaluate_rule(self, rule, input_values):
         parser = Lark(self.corek_grammar, parser='lalr', transformer=CorekTransformer(input_values=input_values))
         comparator = parser.parse
-        print(comparator("(a + b) > 20"))
+        return comparator(rule)
 
 
