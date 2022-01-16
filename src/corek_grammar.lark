@@ -1,0 +1,30 @@
+?start: comparison
+        | "(" comparison ")" "and" "(" comparison ")" -> and_
+        | "(" comparison ")" "or" "(" comparison ")"  -> or_
+
+?comparison: expression ">" expression               -> gt
+            | expression "<" expression              -> lt
+            | expression ">=" expression             -> ge
+            | expression "<=" expression             -> le
+            | expression "==" expression             -> eq
+            | expression "!=" expression             -> ne
+    
+?expression: atom      
+            | "(" atom "and" atom ")"                -> and_
+            | "(" atom "or" atom ")"                 -> or_
+    
+?calculation: atom      
+            | calculation "+" atom                   -> add
+            | calculation "-" atom                   -> sub
+            | calculation "*" atom                   -> mul
+            | calculation "/" atom                   -> div
+                
+?atom: NUMBER                                       -> number
+        | NAME                                      -> var
+        | "(" calculation ")"                  
+                
+%import common.CNAME                                -> NAME
+%import common.NUMBER
+%import common.WS_INLINE
+
+%ignore WS_INLINE
