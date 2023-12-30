@@ -11,13 +11,8 @@ class RulesEngine():
             self.corek_grammar = cgfd.read()
 
     def evaluate_rule(self, rule, input_values):
-        # print("Hello")
         parser = Lark(self.corek_grammar, parser='lalr', transformer=CorekTransformer(input_values=input_values))
-        # parser = Lark(self.corek_grammar, parser='lalr', debug=True)
         comparator = parser.parse
-        # print(comparator.pretty())
-
-        # print(comparator(rule).pretty())
 
         return comparator(rule)
 
