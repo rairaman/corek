@@ -16,7 +16,9 @@ def rules_engine():
     ('(a + b * c) > 10',{'a':10,'b':2,'c':0},False),
     ('(a / b * c) < 10',{'a':10,'b':2,'c':3},False),
     ('a + 2 == 12',{'a':10},True),
-    ('a + 3 == 12',{'a':10},False)
+    ('a + 3 == 12',{'a':10},False),
+    ('a == "hello"',{'a':'hello'},True),
+    ("a == \"hello\"",{'a':'hello'},True),
 ])
 def test_simple_numeric_conditions(rules_engine, rule, input_data, expected_result):
     actual = rules_engine.evaluate_rule(rule, input_data)
