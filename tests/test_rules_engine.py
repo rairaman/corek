@@ -1,6 +1,6 @@
 import pytest
 
-from src.rules_engine import RulesEngine
+from corek.rules_engine import RulesEngine
 
 @pytest.fixture
 def rules_engine():
@@ -14,7 +14,9 @@ def rules_engine():
     ('a > 10',{'a':10},False),
     ('(a + b) > 10',{'a':10,'b':1},True),
     ('(a + b * c) > 10',{'a':10,'b':2,'c':0},False),
+    ('(a + b * c) > 9',{'a':10,'b':2,'c':0},True),
     ('(a / b * c) < 10',{'a':10,'b':2,'c':3},False),
+    ('(a / b - c) < 10',{'a':10,'b':2,'c':3},True),
     ('a + 2 == 12',{'a':10},True),
     ('a + 3 == 12',{'a':10},False),
 ])

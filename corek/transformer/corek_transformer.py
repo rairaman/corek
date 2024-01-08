@@ -12,9 +12,6 @@ class CorekTransformer(Transformer):
         else:
             # Raise an exception if the first and last characters aren't quotes
             raise ValueError(f"Expected a string enclosed in double quotes, got: {string_val}")
-        
-    def bad_custom_str(self, string_val):
-            raise ValueError(f"Expected a string enclosed in double quotes, got: {string_val}")
 
     def __init__(self, input_values: dict):
         self.input_values = input_values

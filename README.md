@@ -5,7 +5,7 @@ An expression parser and evaluator for simple comparison expressions in Python. 
 
 ```python
 
-from rules_engine import RulesEngine
+from corek import RulesEngine
 
 engine = RulesEngine()
 

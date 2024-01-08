@@ -1,12 +1,11 @@
 from lark import Lark
-import src
-from src.corek_transformer import CorekTransformer
-from importlib_resources import files, as_file
+from corek.transformer.corek_transformer import CorekTransformer
+from importlib_resources import files
 
 class RulesEngine():
 
     def __init__(self):
-        source_grammar = files(src).joinpath('corek_grammar.lark')
+        source_grammar = files('corek').joinpath('corek_grammar.lark')
         with open(source_grammar,'r') as cgfd:
             self.corek_grammar = cgfd.read()
 
@@ -14,7 +13,6 @@ class RulesEngine():
         parser = Lark(self.corek_grammar, parser='lalr')
         transformer = CorekTransformer(input_values=input_values)
         ast = parser.parse(rule)
-        print(ast.pretty())
         evaluated_rule = transformer.transform(ast)
         return evaluated_rule
 
